@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestionar Productos</title>
+    <link rel="stylesheet" href="./css/fomularios.css">
+</head>
+<body>
+    <button id="create-button" class="crear2">Crear producto</button>
+    <main>
+        <div id="post-form" style="display: none;">
+            <form id="create-producto-form" class="formulario">
+                <div class="formulario__grupo-input">
+                    <label for="post-id" class="formulario__label">ID:</label><br>
+                    <input type="text" id="post-id" name="id" class="formulario__input"><br>
+                </div>
+                <div class="formulario__grupo-input">
+                    <label for="post-titulo" class="formulario__label">Titulo:</label><br>
+                    <input type="text" id="post-titulo" name="titulo" class="formulario__input"><br>
+                </div>
+                <div class="formulario__grupo-input">
+                    <label for="post-imagen" class="formulario__label">Imagen:</label><br>
+                    <input type="text" id="post-imagen" name="imagen" class="formulario__input"><br>
+                </div>
+                <div class="formulario__grupo-input">
+                    <label for="post-categoriaId" class="formulario__label">Categoria ID:</label><br>
+                    <input type="text" id="post-categoriaId" name="categoriaId" class="formulario__input"><br>
+                </div>
+                <div class="formulario__grupo-input">
+                    <label for="post-categoriaNombre" class="formulario__label">Categoria Nombre:</label><br>
+                    <input type="text" id="post-categoriaNombre" name="categoriaNombre" class="formulario__input"><br>
+                </div>
+                <div class="formulario__grupo-input">
+                    <label for="post-precio" class="formulario__label">Precio:</label><br>
+                    <input type="text" id="post-precio" name="precio" class="formulario__input"><br>
+                </div>
+                <input type="submit" class="crear" value="Crear producto">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <table id="producto-table" class="content-table" style="display: none;" >
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Imagen</th>
+                    <th>Categoria ID</th>
+                    <th>Categoria Nombre</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas de la tabla se insertarán aquí -->
+            </tbody>
+        </table> 
+    </footer>   
+    <script src="./js/post.js"></script>
+</body>
+<footer>
+    
+</footer>
+</html>
+
