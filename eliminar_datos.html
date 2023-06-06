@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Producto</title>
+    <link rel="stylesheet" href="./css/fomularios.css">
+</head>
+<body>
+    <button id="delete-button" class="crear2" data-id="{{idDelProducto}}">Eliminar producto</button>
+    <main>
+        <div id="delete-form" style="display: none;">
+            <form id="delete-producto-form" class="formulario">
+                <label for="delete-id"class="formulario__label">ID:</label><br>
+                <input type="text" id="delete-id" name="id" class="formulario__input"><br>
+                <input type="submit"  class="crear" value="Eliminar producto">
+            </form>
+        </div>
+        <table id="producto-table"  class="content-table" style="display: none;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titulo</th>
+                    <th>Imagen</th>
+                    <th>Categoria ID</th>
+                    <th>Categoria Nombre</th>
+                    <th>Precio</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las filas de la tabla se insertarán aquí -->
+            </tbody>
+        </table>
+    </main>
+    <script src="./js/delete.js"></script>
+</body>
+</html>

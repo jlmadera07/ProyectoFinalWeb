@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,7 @@
     <title>Ecommerce</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/acciones.css">
 </head>
 
 <body>
@@ -25,28 +26,29 @@
             <header>
                 <h1 class="logo">Ecommerce Artesania</h1>
             </header>
+            <!---------------------------------------MENU--------------------------------->
             <nav>
                 <ul class="menu">
                     <li>
-                        <a class="boton-menu boton-categoria active" href="./login.html">
-                            <i class="bi bi-person"></i>Log In/Sing Up
+                        <a class="boton-menu boton-categoria active" href="./acciones.html">
+                            <i></i>Acciones
                         </a>
                     </li>
-
                     <li>
-                        <a href="/"><button id="todos" class="boton-menu boton-categoria "><i class="bi bi-hand-index-thumb-fill"></i> Todos los productos</button></a>
+                        <a href="/"><button id="todos" class="boton-menu boton-categoria "><i
+                                    class="bi bi-hand-index-thumb-fill"></i> Todos los productos</button></a>
                     </li>
                     <li>
-                        <button id="sombrero" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Sombreros</button>
+                        <button id="sombrero" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i>
+                            Sombreros</button>
                     </li>
                     <li>
-                        <button id="camisetas" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Camisetas</button>
+                        <button id="camisetas" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i>
+                            Camisetas</button>
                     </li>
                     <li>
-                        <button id="pantalones" class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Pantalones</button>
-                    </li>
-                    <li>
-                        <button class="boton-menu boton-categoria"><i class="bi bi-hand-index-thumb"></i> Acciones</button>
+                        <button id="pantalones" class="boton-menu boton-categoria"><i
+                                class="bi bi-hand-index-thumb"></i> Pantalones</button>
                     </li>
                     <li>
                         <a class="boton-menu boton-carrito" href="./carrito.html">
@@ -60,21 +62,29 @@
             </footer>
         </aside>
 
-        <!---FORMULARIO DE REGISTRO-->
+        <!----------------------------Acciones-------------------------------------->
         <main>
-            <h2 class="titulo-principal" id="titulo-principal">iniciar secion</h2>
-            <form>
-                <input type="text" name="correo" placeholder="Correo">
-                <input type="password" name="contraseña" placeholder="Contraseña">
-                <p>¿Aún no tienes una cuenta? <a href="./register.html">Regístrate.</a></p><br>
-                <a href="/" class="boton-formulario">Iniciar sesión</a>
-            </form>
+            <h2 class="titulo-principal" id="titulo-principal">Acciones</h2>
+            <ul class="mi-lista">
+                <li>
+                    <div class="botones-contenedor">
+                        <a href="./ingresar_datos.html">
+                            <button class="button button1">Ingresar</button>
+                        </a>
+                        <a href="./eliminar_datos.html">
+                            <button class="button button1">Borrar</button>
+                        </a>
+                    </div>
+                </li>
+            </ul>
         </main>
     </div>
 
-    
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="./js/register.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/menu.js"></script>
 </body>
+
 </html>

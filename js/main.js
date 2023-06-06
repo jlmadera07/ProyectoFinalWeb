@@ -1,12 +1,14 @@
 let categoriaActual = "todos";
 let productos = [];
 
-fetch("./js/productos.json")
+fetch("http://localhost:8082/productos")
     .then(response => response.json())
     .then(data => {
         productos = data;
         cargarProductos(productos);
     })
+    .catch(error => console.error('Error:', error));
+
 
 
 const contenedorProductos = document.querySelector("#contenedor-productos");
@@ -38,9 +40,9 @@ botonesCategorias.forEach(boton => {
         categoriaActual = e.currentTarget.id;
 
         if (categoriaActual != "todos") {
-            const productoCategoria = productos.find(producto => producto.categoria.id === categoriaActual);
-            tituloPrincipal.innerText = productoCategoria.categoria.nombre;
-            const productosBoton = productos.filter(producto => producto.categoria.id === categoriaActual);
+            const productoCategoria = productos.find(producto => producto.categoriaId === categoriaActual);
+            tituloPrincipal.innerText = productoCategoria.categoriaNombre;
+            const productosBoton = productos.filter(producto => producto.categoriaId === categoriaActual);
             cargarProductos(productosBoton);
         } else {
             tituloPrincipal.innerText = "Todos los productos";
@@ -83,9 +85,9 @@ botonesCategorias.forEach(boton => {
         e.currentTarget.classList.add("active");
 
         if (e.currentTarget.id != "todos") {
-            const productoCategoria = productos.find(producto => producto.categoria.id === e.currentTarget.id);
-            tituloPrincipal.innerText = productoCategoria.categoria.nombre;
-            const productosBoton = productos.filter(producto => producto.categoria.id === e.currentTarget.id);
+            const productoCategoria = productos.find(producto => producto.categoriaId === e.currentTarget.id);
+            tituloPrincipal.innerText = productoCategoria.categoriaNombre;
+            const productosBoton = productos.filter(producto => producto.categoriaId === e.currentTarget.id);
             cargarProductos(productosBoton);
         } else {
             tituloPrincipal.innerText = "Todos los productos";
