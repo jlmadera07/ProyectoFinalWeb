@@ -4,62 +4,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar Productos</title>
-    <link rel="stylesheet" href="./css/fomularios.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-    <button id="create-button" class="crear2">Crear producto</button>
-    <main>
-        <div id="post-form" style="display: none;">
-            <form id="create-producto-form" class="formulario">
-                <div class="formulario__grupo-input">
-                    <label for="post-id" class="formulario__label">ID:</label><br>
-                    <input type="text" id="post-id" name="id" class="formulario__input"><br>
-                </div>
-                <div class="formulario__grupo-input">
-                    <label for="post-titulo" class="formulario__label">Titulo:</label><br>
-                    <input type="text" id="post-titulo" name="titulo" class="formulario__input"><br>
-                </div>
-                <div class="formulario__grupo-input">
-                    <label for="post-imagen" class="formulario__label">Imagen:</label><br>
-                    <input type="text" id="post-imagen" name="imagen" class="formulario__input"><br>
-                </div>
-                <div class="formulario__grupo-input">
-                    <label for="post-categoriaId" class="formulario__label">Categoria ID:</label><br>
-                    <input type="text" id="post-categoriaId" name="categoriaId" class="formulario__input"><br>
-                </div>
-                <div class="formulario__grupo-input">
-                    <label for="post-categoriaNombre" class="formulario__label">Categoria Nombre:</label><br>
-                    <input type="text" id="post-categoriaNombre" name="categoriaNombre" class="formulario__input"><br>
-                </div>
-                <div class="formulario__grupo-input">
-                    <label for="post-precio" class="formulario__label">Precio:</label><br>
-                    <input type="text" id="post-precio" name="precio" class="formulario__input"><br>
-                </div>
-                <input type="submit" class="crear" value="Crear producto">
-            </form>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="/ingresar_datos.html">Visualizar datos</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="/crear.html">Registrar</a>
+            <a class="nav-item nav-link" href="/index.html">Carrito</a>
+          </div>
         </div>
-    </main>
-    <footer>
-        <table id="producto-table" class="content-table" style="display: none;" >
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Titulo</th>
-                    <th>Imagen</th>
-                    <th>Categoria ID</th>
-                    <th>Categoria Nombre</th>
-                    <th>Precio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Las filas de la tabla se insertarán aquí -->
-            </tbody>
-        </table> 
-    </footer>   
-    <script src="./js/post.js"></script>
-</body>
-<footer>
-    
-</footer>
-</html>
+    </nav>
+    <br>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Titulo</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">CategoriaId</th>
+                <th scope="col">CategoriaNombre</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="productos">
+          <!-- Los productos se agregarán dinámicamente aquí -->
+        </tbody>
+    </table>
 
+    <script>
+        const eliminarProducto = (id) => {
+          // Mostrar una alerta de confirmación antes de eliminar el producto
+          if (confirm('¿Estás seguro de eliminar este producto?')) {
+            // Realiza una solicitud DELETE a la API para eliminar el producto
+            fetch(`http://localhost:8082/producto/${id}`, {
+              method: 'DELETE'
+            })
+              .then(response => {
+                if (response.ok) {
+                  // Mostrar mensaje de éxito
+                  alert('El producto fue eliminado exitosamente');
+                  // Actualizar la página después de eliminar el producto
+                  location.reload();
+                } else {
+                  throw new Error('Error al eliminar el producto');
+                }
+              })
+              .catch(error => console.error('Error:', error));
+          }
+        };
+
+        fetch('http://localhost:8082/producto')
+          .then(response => response.json())
+          .then(data => {
+            const productosElement = document.getElementById('productos');
+            data.forEach(producto => {
+              const row = document.createElement('tr');
+        
+              const idCell = document.createElement('td');
+              idCell.textContent = producto.id;
+              row.appendChild(idCell);
+        
+              const tituloCell = document.createElement('td');
+              tituloCell.textContent = producto.titulo;
+              row.appendChild(tituloCell);
+        
+              const imagenCell = document.createElement('td');
+              imagenCell.textContent = producto.imagen;
+              row.appendChild(imagenCell);
+        
+              const categoriaIdCell = document.createElement('td');
+              categoriaIdCell.textContent = producto.categoriaId;
+              row.appendChild(categoriaIdCell);
+        
+              const categoriaNombreCell = document.createElement('td');
+              categoriaNombreCell.textContent = producto.categoriaNombre;
+              row.appendChild(categoriaNombreCell);
+        
+              const precioCell = document.createElement('td');
+              precioCell.textContent = producto.precio;
+              row.appendChild(precioCell);
+        
+              const accionesCell = document.createElement('td');
+        
+              // Crea el botón de "Editar"
+              const editarButton = document.createElement('button');
+              editarButton.textContent = 'Editar';
+              editarButton.className = 'btn btn-primary'; 
+              editarButton.onclick = () => {
+                // Redirige al usuario a la página de edición con el ID del producto en la URL
+                location.href = '/editar.html?id=' + producto.id;
+              };
+              accionesCell.appendChild(editarButton);
+        
+              // Crea el botón de "Eliminar"
+              const eliminarButton = document.createElement('button');
+              eliminarButton.textContent = 'Eliminar';
+              eliminarButton.className = 'btn btn-danger';
+              eliminarButton.onclick = () => {
+                eliminarProducto(producto.id);
+              };
+              accionesCell.appendChild(eliminarButton);
+        
+              row.appendChild(accionesCell);
+              productosElement.appendChild(row);
+            });
+          })
+          .catch(error => console.error('Error:', error));
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <footer></footer>
+</body>
+</html>

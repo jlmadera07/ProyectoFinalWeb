@@ -125,9 +125,19 @@ button:hover {
 .input-error {
     border: 2px solid red !important;
 }
-.input-success {
-    border: 1px solid green;
+.update-button, .delete-button {
+    /* Estilos comunes para ambos botones */
+    width: 100px; /* Ancho fijo */
+    height: 50px; /* Altura fija */
+    padding: 10px; /* Espacio alrededor del texto */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    text-align: center; /* Centra el texto */
 }
+
+.delete-button {
+    margin-top: 10px;
+}
+
 
 
 

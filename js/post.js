@@ -1,4 +1,16 @@
+/*document.addEventListener('DOMContentLoaded', function() {
+    const idInput = document.getElementById('post-id');
+    const tituloInput = document.getElementById('post-titulo');
+    const imagenInput = document.getElementById('post-imagen');
+    const categoriaIdInput = document.getElementById('post-categoriaId');
+    const categoriaNombreInput = document.getElementById('post-categoriaNombre');
+    const precioInput = document.getElementById('post-precio');
+
+    // Resto de tu código...
+});
+
 // Manejar el clic en el botón para mostrar y ocultar el formulario
+
 document.getElementById('create-button').addEventListener('click', function() {
     const form = document.getElementById('post-form');
     const table = document.getElementById('producto-table');
@@ -19,13 +31,6 @@ document.getElementById('create-button').addEventListener('click', function() {
 document.getElementById('create-producto-form').addEventListener('submit', function(e) {
     e.preventDefault();
 
-     const idInput = document.getElementById('post-id');
-    const tituloInput = document.getElementById('post-titulo');
-    const imagenInput = document.getElementById('post-imagen');
-    const categoriaIdInput = document.getElementById('post-categoriaId');
-    const categoriaNombreInput = document.getElementById('post-categoriaNombre');
-    const precioInput = document.getElementById('post-precio');
-
     const inputs = [idInput, tituloInput, imagenInput, categoriaIdInput, categoriaNombreInput, precioInput];
 
     let allFilled = true;
@@ -45,15 +50,7 @@ document.getElementById('create-producto-form').addEventListener('submit', funct
             allFilled = false;
             input.classList.add('input-error');
         }
-        else if (input === categoriaNombreInput && !validCategories.includes(input.value.trim().toLowerCase())) {
-            allFilled = false;
-            input.classList.add('input-error');
-        } else if (input === precioInput && isNaN(input.value)) {
-            allFilled = false;
-            input.classList.add('input-error');
-        } else {
-            input.classList.add('input-success');
-        }
+
     }
 
     if (!allFilled) {
@@ -67,9 +64,17 @@ document.getElementById('create-producto-form').addEventListener('submit', funct
     // Convertir la FormData a un objeto
     const data = Object.fromEntries(formData);
     
+    let url = "http://localhost:8082/productos";
+    let method = 'POST';
 
-    fetch("http://localhost:8082/productos", {
-        method: 'POST',
+    // Verificar si el botón es para actualizar
+    if (document.getElementById('create-button').textContent === 'Actualizar') {
+        url += '/' + document.getElementById('create-button').dataset.id;
+        method = 'PUT';
+    }
+
+    fetch(url, {
+        method: method,
         headers: {
             'Content-Type': 'application/json',
         },
@@ -81,16 +86,23 @@ document.getElementById('create-producto-form').addEventListener('submit', funct
         } else {
             throw new Error('Error: ' + response.statusText);
         }
-    }).then(data => {
+    })
+    .then(data => {
         console.log('Success:', data);
-        alert("Los datos fueron insertados exitosamente."); // Alerta de éxito
-
-    }).catch((error) => {
+        if (method === 'POST') {
+            alert("Los datos fueron insertados exitosamente."); // Alerta de éxito
+        } else {
+            alert("Los datos fueron actualizados exitosamente."); // Alerta de éxito
+        }
+    })
+    .catch((error) => {
         console.error('Error:', error);
-        alert("No se puedieron enviar los datos."); // Alerta de éxito
-
-    });
-    loadTableData();
+        alert("No se pudieron enviar los datos."); // Alerta de error
+    })
+    .finally(() => {
+        loadTableData(); // Recarga los datos de la tabla después de crear o actualizar
+        document.getElementById('create-button').textContent = 'Crear Producto'; // Cambia el texto del botón de vuelta a 'Crear Producto'
+    });    
 });
 function loadTableData() {
     fetch("http://localhost:8082/productos")
@@ -120,10 +132,46 @@ function loadTableData() {
 
             cell = row.insertCell();
             cell.textContent = producto.precio;
+
+            // Agregar celda de acciones con botones "Actualizar" y "Eliminar"
+            cell = row.insertCell();
+            let updateButton = document.createElement('button');
+             updateButton.textContent = 'Actualizar';
+             updateButton.className = 'update-button'; // Agrega esta línea
+             updateButton.dataset.id = producto.id; // Añade esta línea
+             cell.appendChild(updateButton);
+             let deleteButton = document.createElement('button');
+             deleteButton.textContent = 'Eliminar';
+             deleteButton.className = 'delete-button'; // Agrega esta línea
+             cell.appendChild(deleteButton);
         });
     })
     .catch(error => console.error('Error:', error));
 }
+document.addEventListener('click', function(e) {
+    if (e.target && e.target.className === 'update-button') {
+        // Obtener el ID del producto desde el atributo de datos del botón de actualizar
+        const id = e.target.dataset.id;
+        // Realizar una solicitud GET al servidor para obtener los datos del producto
+        fetch(`http://localhost:8082/productos/${id}`)
+        .then(response => response.json())
+        .then(producto => {
+            // Cargar los datos del producto en el formulario
+            idInput.value = producto.id;
+            tituloInput.value = producto.titulo;
+            imagenInput.value = producto.imagen;
+            categoriaIdInput.value = producto.categoriaId;
+            categoriaNombreInput.value = producto.categoriaNombre;
+            precioInput.value = producto.precio;
+            // Cambiar el estado del botón "Crear producto" a "Actualizar"
+            document.getElementById('create-button').textContent = 'Actualizar';
+            document.getElementById('create-button').dataset.id = producto.id; // Añade esta línea
+        })
+        .catch(error => console.error('Error:', error));
+    }
+});
+
+
 
 // Cargar datos de la tabla cuando se carga la página
-window.onload = loadTableData;
+window.onload = loadTableData;*/

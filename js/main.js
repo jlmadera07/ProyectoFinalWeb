@@ -1,7 +1,7 @@
 let categoriaActual = "todos";
 let productos = [];
 
-fetch("http://localhost:8082/productos")
+fetch("http://localhost:8082/producto")
     .then(response => response.json())
     .then(data => {
         productos = data;
