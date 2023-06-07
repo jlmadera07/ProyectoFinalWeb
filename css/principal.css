@@ -55,7 +55,7 @@ body{
     font-weight: 600;
 }
 .menu .navbar ul li a:hover{
-    color: blueviolet;
+    color: black;
 }
 #menu {
     display: none;

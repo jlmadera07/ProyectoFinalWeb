@@ -398,18 +398,21 @@ main {
 
 /* ---------------Estilos para el formulario de login y register---------------- */
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
   
   form input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: none;
-    border-bottom: 1px solid #ccc;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     font-size: 16px;
   }
   
@@ -425,7 +428,6 @@ form {
     font-size: 16px;
   }
   
-  
   /* Estilos para el título principal */
   .titulo-principal {
     text-align: center;
@@ -435,20 +437,21 @@ form {
   
   .boton-formulario {
     display: inline-block;
-    background-color: #4b33a8;
-    color: white;
+    background-color: black;
+    color: yellow;
     padding: 12px 24px;
     font-size: 16px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
   }
   
   .boton-formulario:hover {
-    background-color: #785ce9;
+    background-color: rgb(75, 75, 75);
   }
-
-  .boton-formulario2{
+  
+  .boton-formulario2 {
     display: inline-block;
     background-color: white;
     color: black;
@@ -457,10 +460,47 @@ form {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
-
+  
   .boton-formulario2:hover {
     background-color: gray;
     color: white;
+  }
+
+  #lista-usuarios {
+    list-style: none;
+    padding: 0;
+  }
+
+  .usuario {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+  }
+
+  .usuario-nombre {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  .acciones button {
+    padding: 5px 10px;
+    margin-left: 5px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  .acciones button:hover {
+    background-color: #ddd;
+  }
+  
+  .error {
+    border-color: red;
   }
   
